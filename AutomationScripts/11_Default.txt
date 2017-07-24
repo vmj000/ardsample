@@ -1,0 +1,42 @@
+
+describe('11', function()
+{
+browser.ignoreSynchronization = true;
+
+it('Should have the login page up and running, and have the correct title.', function()
+{
+browser.get('http://localhost:8080/#/login');
+expect(browser.getTitle()).toEqual('AngularJS User Registration and Login Example');
+});
+
+it('Should allow you to go to the registration page from login.', function()
+{
+expect(element(by.css('.form-actions a')).getAttribute('href')).toEqual('http://localhost:8080/#/register');
+element(by.css('.form-actions a')).getAttribute('href').click();
+});
+
+it('Should allow you to enter a first and last name along with a username and password.', function()
+{
+element(by.model('vm.user.lastName')).sendKeys('¬{}¬');
+element(by.model('vm.user.username')).sendKeys('££&$%_');
+browser.findElement(By.css('form')).submit();
+});
+
+it('Should allow you to go to the login page from registration.', function()
+{
+expect(element(by.css('.form-actions a')).getAttribute('href')).toEqual('http://localhost:8080/#/login');
+element(by.css('.form-actions a')).getAttribute('href').click();
+});
+
+it('Should allow login fields to be filled in.', function()
+{
+element(by.model('vm.password')).sendKeys(' ');
+browser.findElement(By.css('form')).submit();
+});
+
+it('Should allow you to leave the home page.', function()
+{
+expect(element(by.css('.form-actions a')).getAttribute('href')).toEqual('http://localhost:8080/#/login');
+element(by.css('.form-actions a')).getAttribute('href').click();
+});
+});

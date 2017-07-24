@@ -1,0 +1,26 @@
+
+describe('9', function()
+{
+browser.ignoreSynchronization = true;
+
+it('Should have the login page up and running, and have the correct title.', function()
+{
+browser.get('http://localhost:8080/#/login');
+expect(browser.getTitle()).toEqual('AngularJS User Registration and Login Example');
+});
+
+it('Should allow you to go to the registration page from login.', function()
+{
+expect(element(by.css('.form-actions a')).getAttribute('href')).toEqual('http://localhost:8080/#/register');
+element(by.css('.form-actions a')).getAttribute('href').click();
+});
+
+it('Should allow you to enter a first and last name along with a username and password.', function()
+{
+element(by.model('vm.user.firstName')).sendKeys('????????????');
+element(by.model('vm.user.lastName')).sendKeys('Smith');
+element(by.model('vm.user.username')).sendKeys('JSmith');
+browser.findElement(By.css('form')).submit();
+});
+console.log('\t->\t Use Case 9 has finished.');
+});
